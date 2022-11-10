@@ -1,9 +1,11 @@
 /* 1- Capturar as informações vindas do HTML e obter os valores com o JS */
 
+
+let inputNomeSobrenome = document.getElementById("nome");
+
 let btn = document.getElementById("salvar");
 btn.addEventListener('click', function (evento) {
 
-    let inputNomeSobrenome = document.getElementById("nome").value;
     let inputIdade = document.getElementById("idade");
     let inputAltura = document.getElementById("altura");
     //let inputBio = document.getElementById("biografia");
@@ -49,8 +51,8 @@ btn.addEventListener('click', function (evento) {
 
         //Retirando espaços em branco do inicio e do final da string
         let textoSemEspacos = textoMaiusculo.trim();
-        console.log("Texto com espaços:"+textoMaiusculo);
-        console.log("Texto sem espaços:"+textoSemEspacos);
+        console.log("Texto com espaços:" + textoMaiusculo);
+        console.log("Texto sem espaços:" + textoSemEspacos);
     }
 
 });
@@ -59,7 +61,68 @@ btn.addEventListener('click', function (evento) {
 
 /* Realizar algumas validações nos campos do formulário*/
 
+btn.style.backgroundColor = "#787676"
 
-  /* Nome: Mínimo de 4 caracteres */
+/* Nome: Mínimo de 4 caracteres */
 
-  /* Email: Deve possuir um formato válido (RegExp) */
+inputNomeSobrenome.addEventListener("focus", function () {
+    console.log("Clicou no campo");
+    inputNomeSobrenome.style.backgroundColor = "#CDC6C68D"
+});
+
+inputNomeSobrenome.addEventListener("keyup", function () {
+
+    let nomeValidacao = document.getElementById("nomeValidacao");
+    inputNomeSobrenome.style.backgroundColor = "#FFFFFF"
+
+    if (inputNomeSobrenome.value.length >= 4) {
+        //Sucesso na validação
+        inputNomeSobrenome.style.border = ""
+        nomeValidacao.innerText = ""
+        inputNomeSobrenome.style.border = "solid 1.5px #13A02D";
+        //Habilitando o botão de salvar
+        btn.removeAttribute("disabled");
+        btn.style.backgroundColor = "#0b5ed7"
+
+    } else {
+        //Falha na validação
+        inputNomeSobrenome.style.border = "solid 1.5px #D8341B";
+        nomeValidacao.innerText = "Informe no mínimo 4 caracteres";
+        nomeValidacao.style.color = "#D8341B";
+        nomeValidacao.style.fontWeight = "bold";
+        btn.setAttribute("disabled", true);
+        btn.style.backgroundColor = "#787676"
+    }
+});
+
+/* Email: Deve possuir um formato válido (RegExp) */
+
+email.addEventListener("focus", function () {
+    console.log("Clicou no campo");
+    email.style.backgroundColor = "#CDC6C68D"
+});
+
+email.addEventListener("keyup", function () {
+
+    let emailValidacao = document.getElementById("emailValidacao");
+    email.style.backgroundColor = "#FFFFFF"
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+        //Sucesso na validação
+        email.style.border = ""
+        emailValidacao.innerText = ""
+        email.style.border = "solid 1.5px #13A02D";
+        //Habilitando o botão de salvar
+        btn.removeAttribute("disabled");
+        btn.style.backgroundColor = "#0b5ed7"
+
+    } else {
+        //Falha na validação
+        email.style.border = "solid 1.5px #D8341B";
+        nomeValidacao.innerText = "Informe no mínimo 4 caracteres";
+        emailValidacao.style.color = "#D8341B";
+        emailValidacao.style.fontWeight = "bold";
+        btn.setAttribute("disabled", true);
+        btn.style.backgroundColor = "#787676"
+    }
+});

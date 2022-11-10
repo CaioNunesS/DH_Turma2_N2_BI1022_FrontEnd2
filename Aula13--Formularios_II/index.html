@@ -110,12 +110,14 @@
               <div class="col-sm-6">
                 <label for="nome" class="form-label">Nome e sobrenome</label>
                 <input id="nome" type="text" class="form-control" placeholder="Cleber Santos" required>
+                <small id="nomeValidacao"></small>
               </div>
 
               <!-- IDADE -->
               <div class="col-sm-6">
                 <label for="idade" class="form-label">Idade</label>
                 <input id="idade" type="number" class="form-control" placeholder="34">
+
               </div>
 
               <!-- ALTURA -->
@@ -128,6 +130,7 @@
               <div class="col-sm-6">
                 <label for="email" class="form-label">E-mail</label>
                 <input id="email" type="email" class="form-control" placeholder="aluno@digitalhouse.com.br">
+                <small id="emailValidacao"></small>
               </div>
 
               <!-- LISTA DE ITENS -->
@@ -175,7 +178,7 @@
 
             <hr class="my-4">
             <!-- BOTÃO DE SALVAR -->
-            <button id="salvar" class="btn btn-primary btn-lg" type="submit">Salvar</button>
+            <button id="salvar" class="btn btn-primary btn-lg" type="submit" disabled>Salvar</button>
           </form>
         </div>
       </section>
