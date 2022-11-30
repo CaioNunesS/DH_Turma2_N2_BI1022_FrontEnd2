@@ -13,7 +13,7 @@ let passwordIsValid = false;
 let minPasswordCaracteres = 4;
 
 /* Adiciona um evento de click ao botão de acessar */
-botaoAcessarLogin.addEventListener("click", async function (evento) {
+botaoAcessarLogin.addEventListener("click", function (evento) {
 
     //Busca os valores atualizados dos inputs
     emailLogin = document.querySelector("#inputEmail");
@@ -28,18 +28,57 @@ botaoAcessarLogin.addEventListener("click", async function (evento) {
         emailLogin = normalizaStringUsandoTrim(emailLogin.value);
         passwordLogin = normalizaStringUsandoTrim(passwordLogin.value);
 
-        console.log(`E-mail: ${emailLogin}`);
-        console.log(`Senha: ${passwordLogin}`);
-        /* 
-        -> Criar o objeto JSON que será enviado
-        -> Realizar a conexão com a API
+        let usuarioJs = {
+            email: emailLogin,
+            password: passwordLogin
+        }
 
-        */
+        let usuarioJson = JSON.stringify(usuarioJs);
+
+        loginAPI(usuarioJson);
+
+
     } else {
         console.log("Login inválido");
     }
 
 });
+
+
+function loginAPI(objetoJson) {
+    let requestInit = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: objetoJson
+    }
+
+    fetch(`${baseUrl()}/users/login`, requestInit)
+        .then(
+            resposta => {
+                return resposta.json();
+            }
+        )
+        .then(
+            resposta => {
+                loginSucesso(resposta);
+            }
+        )
+        .catch(
+            erro => {
+                loginErro(erro);
+            }
+        )
+}
+
+function loginSucesso(resposta) {
+
+}
+
+function loginErro(resposta) {
+
+}
 
 /* Verifica se ambas as informações do formulário de login foram validadas */
 function validaLogin() {
