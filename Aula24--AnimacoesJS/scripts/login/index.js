@@ -65,6 +65,8 @@ function loginAPI(objetoUsuarioJson) {
         }
     }
 
+    exibeSpinner();
+
     fetch(`${apiBaseURL()}/users/login`, configRequest)
         .then(resultado => {
 
@@ -79,11 +81,13 @@ function loginAPI(objetoUsuarioJson) {
         ).then(
             resultado => {
                 //Chama função ao obter sucesso no login
+                ocultaSpinner();
                 loginSucesso(resultado);
             }
         ).catch(
             erro => {
                 //Chama função ao obter algum erro
+                ocultaSpinner()
                 loginErro(erro);
             }
         );
@@ -100,7 +104,7 @@ function loginErro(respostaApi) {
     //Verifica os status de "senha incorreta ou email incorreto"
     if (respostaApi.status == 400 || respostaApi.status == 404) {
         //Ao obter algum desses status, chama a função erro no login
-        alert("Email e/ou senha inválidos");
+        //alert("Email e/ou senha inválidos");
     }
 }
 
