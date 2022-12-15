@@ -162,14 +162,23 @@ let tarefaErro = (erro) => {
 }
 
 function encerrarSessao() {
-    let escolhaUsuario = confirm("Deseja realmente finalizar a sessão e voltar para o login ?");
-    if (escolhaUsuario) {
 
-        //Remove o token do Storage
-        sessionStorage.removeItem("jwt");
-        
-        //Direciona para a tela de login
-        window.location = "index.html"
-    }
+    Swal.fire({
+        title: 'Encerrar sessão',
+        text: "Deseja realmente finalizar a sessão e voltar para o login ?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#8830D6',
+        cancelButtonColor: '#A34949',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //Remove o token do Storage
+            sessionStorage.removeItem("jwt");
 
+            //Direciona para a tela de login
+            window.location = "index.html"
+        }
+    })
 }
